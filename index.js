@@ -9,8 +9,13 @@ const app = express();
 const whiteList = [process.env.FRONTEND_URL];
 
 const pool = new pg.Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
+  //connectionString: process.env.DATABASE_URL,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+  //ssl: true,
 });
 
 app.use(
@@ -25,7 +30,7 @@ app.get("/", (req, res) => {
 
 app.get("/projects", async (req, res) => {
   const result = await pool.query(
-    "SELECT * FROM public.projects ORDER BY id ASC"
+    "SELECT 'Adincoha' Base,* FROM public.projects ORDER BY id ASC"
   );
   return res.json(result.rows[0]);
 });
