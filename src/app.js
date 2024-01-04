@@ -9,7 +9,7 @@ import morgan from "morgan";
 import routerUsua from "./routes/usua.routes.js";
 // Fazt code Nodejs React Mongodb Login y CRUD (Aplicación FullStack)
 // https://www.youtube.com/watch?v=NmkY4JgS21A&t=655s
-import routerProject from "./routes/project.routes.js";
+import routerusuaAdmin from "./routes/usuaAdmin.routes.js";
 import cookieParser from "cookie-parser";
 // Fazt code Nodejs React Mongodb Login y CRUD (Aplicación FullStack) 1 h 05 min
 // https://www.youtube.com/watch?v=NmkY4JgS21A&t=655s
@@ -23,16 +23,6 @@ app.use(cookieParser());
 
 const whiteList = [process.env.FRONTEND_URL];
 
-const pool = new pg.Pool({
-  //connectionString: process.env.DATABASE_URL,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
-  //ssl: true,
-});
-
 app.use(
   cors({
     origin: whiteList,
@@ -40,7 +30,8 @@ app.use(
 );
 
 app.use("/api", routerUsua);
-app.use(routerProject);
+// app.use(routerProject);
+app.use("/api", routerusuaAdmin);
 app.use((err, req, res, next) => {
   return res.json({
     message: err.message,
